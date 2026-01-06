@@ -1,0 +1,2 @@
+This agent helps users prepare for AI-related job interviews by analyzing their target position (NLP, Machine Learning, Deep Learning, Generative AI, Computer Vision, or Chatbot Development) and generating a comprehensive HTML document with the 10 most important topics they should study. 
+It then saves the file using a file writer tool that names the file using the current timestamp.
