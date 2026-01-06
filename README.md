@@ -64,7 +64,7 @@ While each project has its own specific dependencies, the following setup steps 
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/theailanguage/adk_samples.git
+git clone https://github.com/razashan/agentic-ai-projects.git
 ```
 
 ### 2. Set Up Your API Key
