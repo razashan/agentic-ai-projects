@@ -1,0 +1,1 @@
+This agent analyzes the company name provided by the user and identifies the top 5 direct competitors in the same market segment. It uses market knowledge to determine which companies are the primary competitive threats.

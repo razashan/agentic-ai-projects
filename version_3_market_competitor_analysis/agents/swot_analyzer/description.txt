@@ -1,0 +1,1 @@
+This agent synthesizes all competitor analyses and creates comprehensive SWOT (Strengths, Weaknesses, Opportunities, Threats) matrices. It identifies strategic opportunities and threats based on competitive positioning.

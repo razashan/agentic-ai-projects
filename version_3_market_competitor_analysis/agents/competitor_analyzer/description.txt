@@ -1,0 +1,1 @@
+This agent analyzes individual competitors identified by the competitor_identifier agent. It conducts in-depth research on each competitor's market position, strategies, strengths, weaknesses, and competitive advantages.

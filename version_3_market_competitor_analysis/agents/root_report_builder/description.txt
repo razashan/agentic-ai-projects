@@ -1,0 +1,1 @@
+Competitive Market Analysis System - Orchestrates the complete competitive analysis workflow from company name input to comprehensive HTML report generation.
