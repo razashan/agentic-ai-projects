@@ -1,0 +1,15 @@
+The Analysis Agent is responsible for performing business-level analysis
+on data extracted by the Data Extraction Agent in the Query-to-Insight system.
+
+It reads the tab-separated results file produced by the Data Extraction Agent
+and performs calculations, aggregations, and rankings based on the user’s
+intent. The agent supports analysis for intents including course sales,
+enrollments, instructor performance, revenue, and general analytics.
+
+The output of this agent is a timestamped text file containing the analysis
+results in a clear, tabular, or summary format. The agent returns a status
+dictionary containing the success/error state, the path to the saved results
+file, and a descriptive message.
+
+This agent does not access the database or generate SQL queries; it only
+processes the data provided.

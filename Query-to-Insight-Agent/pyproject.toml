@@ -1,0 +1,23 @@
+[project]
+name = "competitive-market-analysis"
+version = "1.0.0"
+description = "Multi-agent system for comprehensive competitive market analysis"
+authors = [{name = "The AI Language", email = "info@theailanguage.com"}]
+requires-python = ">=3.11"
+dependencies = [
+    "google-adk>=0.1.0",
+    "google-generativeai>=0.3.0",
+    "python-dotenv>=1.0.0",
+    "pandas>=2.0.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=7.0",
+    "black>=23.0",
+    "ruff>=0.1.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

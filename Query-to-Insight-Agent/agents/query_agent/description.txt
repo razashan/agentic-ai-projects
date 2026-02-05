@@ -1,0 +1,16 @@
+The SQL Query Writer Agent is responsible for translating business analytics
+requests into executable SQL queries.
+
+This agent receives the user’s original question along with an intent label
+identified by the Intent Classifier Agent. Based on this intent, it generates
+a valid and optimized SQLite SQL query using only the predefined DatatechCon
+database schema.
+
+The agent does not perform data execution or analysis. Its sole responsibility
+is query generation. Once the SQL query is produced, the agent saves it to a
+timestamped .txt file so it can be consumed by downstream agents such as the
+Data Extraction Agent.
+
+By enforcing strict schema usage and intent-based query rules, this agent
+ensures accuracy, consistency, and separation of concerns within the
+multi-agent system.

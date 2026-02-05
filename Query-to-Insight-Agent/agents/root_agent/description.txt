@@ -1,0 +1,13 @@
+The Root Query-to-Insight Agent orchestrates the full multi-agent pipeline
+from user query to actionable insights.
+
+It sequentially routes the task through these sub-agents:
+
+1. Intent Classifier Agent: determines the user's request type (e.g., course sales, top instructor).
+2. SQL Writer Agent: generates SQL queries based on the identified intent.
+3. Data Extraction Agent: executes SQL queries and fetches data from the database.
+4. Analyze Agent: performs aggregation, ranking, or statistical analysis on fetched data.
+5. Insight Generator Agent: produces human-readable insights, summaries, and recommendations.
+
+This agent ensures smooth data flow and proper input/output handling between
+each sub-agent in the pipeline.

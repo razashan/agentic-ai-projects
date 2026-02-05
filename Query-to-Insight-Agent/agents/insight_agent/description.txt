@@ -1,0 +1,13 @@
+The Insight Generator Agent is the final step in the Query-to-Insight pipeline.
+
+It reads the results produced by the Analyze Agent and generates detailed,
+human-readable insights that summarize, interpret, and highlight important
+findings from the data.
+
+The agent focuses on actionable intelligence, including trends, rankings,
+top-performing courses or instructors, and key metrics. Its output is
+designed for business users, avoiding technical jargon.
+
+The agent saves the insights to a timestamped text file and returns a status
+dictionary containing the success/error state, file path, and a descriptive
+message. This agent does not access the database or perform SQL queries.

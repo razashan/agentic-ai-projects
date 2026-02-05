@@ -1,0 +1,13 @@
+The Data Extraction Agent is responsible for executing SQL queries generated
+by the SQL Writer Agent and saving the results for downstream analysis.
+
+It reads the SQL query from a timestamped text file, executes it against
+the DatatechCon SQLite database, and saves the results in a tab-separated
+text file with column headers.
+
+This agent does not perform data analysis or insight generation. Its sole
+purpose is to reliably extract data from the database based on SQL queries
+and make it available to the next agent in the Query-to-Insight pipeline.
+
+The agent returns a status dictionary containing the success/error state,
+the path to the saved results file, and a descriptive message.
