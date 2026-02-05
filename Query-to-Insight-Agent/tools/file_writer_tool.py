@@ -140,6 +140,8 @@ def analyze_data_and_save_to_file(
         data_file_path (str): Path to the tab-separated data file.
         intent (str): Intent label for the type of analysis.
         output_folder (str): Folder to save the results. Default: "output".
+    
+    intent = intent.upper().strip()
 
     Returns:
         dict: Status dictionary with file path and message.
@@ -189,6 +191,8 @@ def analyze_data_and_save_to_file(
                 df["revenue"] = df["total_enrollments"] * df["price"]
                 result_df = df.groupby("title")["revenue"].sum().reset_index()
                 result_df = result_df.sort_values("revenue", ascending=False)
+            elif "title" in df.columns and "price" in df.columns:
+                result_df = df[["title", "price"]].sort_values("price", ascending=False)
             else:
                 raise ValueError("Missing required columns for REVENUE_ANALYSIS")
 
@@ -235,6 +239,8 @@ def generate_insights_and_save_to_file(
         analysis_file_path (str): Path to the analysis results file (tab-separated).
         intent (str): Intent label to guide insight generation.
         output_folder (str): Folder to save insights file. Default: "output".
+    
+    intent = intent.upper().strip()
 
     Returns:
         dict: Status dictionary with file path and message.
@@ -280,10 +286,16 @@ def generate_insights_and_save_to_file(
 
             elif intent == "REVENUE_ANALYSIS":
                 top_course = df.iloc[0]
-                insights.append(f"The course generating the highest revenue is '{top_course['title']}' with total revenue of {top_course['revenue']}.")
-                insights.append("Revenue breakdown by course:")
-                for idx, row in df.iterrows():
-                    insights.append(f"{idx+1}. {row['title']}: {row['revenue']}")
+                if "revenue" in df.columns:
+                    insights.append(f"The course generating the highest revenue is '{top_course['title']}' with total revenue of {top_course['revenue']}.")
+                    insights.append("Revenue breakdown by course:")
+                    for idx, row in df.iterrows():
+                        insights.append(f"{idx+1}. {row['title']}: {row['revenue']}")
+                elif "price" in df.columns:
+                     insights.append(f"The most expensive course is '{top_course['title']}' priced at {top_course['price']}.")
+                     insights.append("Price ranking:")
+                     for idx, row in df.iterrows():
+                         insights.append(f"{idx+1}. {row['title']}: {row['price']}")
 
             else:  # GENERAL_ANALYTICS
                 insights.append("Summary of analysis:")
@@ -301,7 +313,8 @@ def generate_insights_and_save_to_file(
         return {
             "status": "success",
             "file": insights_file,
-            "message": f"Insights generated successfully. {len(insights)} lines saved."
+            "message": f"Insights generated successfully. Content: {' '.join(insights)}",
+            "insights": insights
         }
 
     except Exception as e:
@@ -309,4 +322,60 @@ def generate_insights_and_save_to_file(
             "status": "error",
             "file": None,
             "message": f"Error generating insights: {str(e)}"
+        }
+
+def read_file_content(file_path: str) -> dict:
+    """
+    Reads the content of a text-based file (e.g., SQL results) and returns it as a string.
+    
+    Args:
+        file_path (str): Path to the file to read.
+        
+    Returns:
+        dict: Status dictionary with content or error message.
+    """
+    try:
+        content = Path(file_path).read_text(encoding="utf-8")
+        return {
+            "status": "success",
+            "content": content,
+            "message": "File read successfully."
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "content": None,
+            "message": f"Error reading file {file_path}: {str(e)}"
+        }
+
+def save_text_file(content: str, filename_prefix: str = "analysis", output_folder: str = "output") -> dict:
+    """
+    Saves a string content to a timestamped text file.
+    
+    Args:
+        content (str): Text content to save.
+        filename_prefix (str): Prefix for the filename (e.g., 'analysis', 'insights').
+        output_folder (str): Folder to save the file.
+        
+    Returns:
+        dict: Status dictionary with file path.
+    """
+    # Ensure output folder exists
+    Path(output_folder).mkdir(exist_ok=True)
+    
+    timestamp = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
+    filename = f"{output_folder}/{timestamp}_{filename_prefix}.txt"
+    
+    try:
+        Path(filename).write_text(content, encoding="utf-8")
+        return {
+            "status": "success",
+            "file": filename,
+            "message": f"File saved successfully to {filename}"
+        }
+    except Exception as e:
+        return {
+            "status": "error",
+            "file": None,
+            "message": f"Error saving file: {str(e)}"
         }
